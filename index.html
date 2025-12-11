@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:Arial; margin:20px; background:#f4f7ff;">
+<h2 style="text-align:center; color:#333;">Vote Validation</h2>
+<!-- Input Section Box -->
+<div style="
+ background:white;
+ width:350px;
+ margin:auto;
+ padding:20px;
+ border-radius:8px;
+ border:1px solid #d0d0d0;
+ box-shadow:0 0 5px rgba(0,0,0,0.1);
+ text-align:center;
+">
+
+ <label style="font-size:18px;">Enter your age:</label><br><br>
+ <input id="ageInput" type="number" min="0" placeholder="e.g.,
+18"
+ style="padding:10px; width:150px; border:1px solid #999;
+border-radius:5px;">
+ <button id="checkBtn"
+ style="padding:10px 20px; margin-left:10px;
+background:#4CAF50; color:white; border:none; border-radius:5px;
+cursor:pointer;">
+ Check Eligibility
+ </button>
+ <!-- Output Message -->
+ <p id="result" style="font-size:18px; margin-top:20px; "font weight":bold;"></p>
+</div>
+<script>
+ // Get references to DOM elements
+ const ageInput = document.getElementById('ageInput');
+ const checkBtn = document.getElementById('checkBtn');
+ const resultP = document.getElementById('result');
+ // When button is clicked
+ checkBtn.addEventListener('click', function() {
+ const raw = ageInput.value;
+ const age = Number(raw);
+ // Handle invalid input
+ if (raw.trim() === '' || Number.isNaN(age)) {
+ resultP.style.color = 'crimson';
+ resultP.textContent = 'Please enter a valid age.';
+ return;
+ }
+ if (age < 0) {
+ resultP.style.color = 'crimson';
+ resultP.textContent = 'Age cannot be negative.';
+ return;
+ }
+ // Voting eligibility rules
+ if (age < 18) {
+ resultP.style.color = 'darkorange';
+ resultP.textContent = 'You are NOT eligible to vote yet.';
+ } else if (age === 18) {
+ resultP.style.color = 'green';
+ resultP.textContent = 'Congrats — you are now eligible to vote! Please register.';
+ } else {
+ resultP.style.color = 'green';
+ resultP.textContent = 'You are eligible to vote.';
+ }
+ });
+</script>
+</body>
